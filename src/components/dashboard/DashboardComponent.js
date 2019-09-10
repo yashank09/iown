@@ -1,17 +1,17 @@
 import React from "react";
-import "./DashboardComponent.css";
 
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
-import ProfilePicture from "../../screens/ProfilePicture";
+import UserCard from "../../screens/UserCard";
+import TabComponent from "../tab/TabComponent";
 
 import { connect } from "react-redux";
 
 const DashboardComponent = props => {
   return (
     <Container maxWidth="lg">
-      <ProfilePicture url={props.userPicture} />
-      <Typography>{props.userName}</Typography>
+      <UserCard userName={props.userName} userPicture={props.userPicture} />
+      <TabComponent />
     </Container>
   );
 };

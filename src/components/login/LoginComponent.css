@@ -12,6 +12,14 @@
   padding-top: 6%;
 }
 
+.brandTextLower {
+  padding-top: 1.5%;
+}
+
+.brandTextLowerPhone {
+  padding-top: 8%;
+}
+
 .loginIcons {
   text-align: center;
 }

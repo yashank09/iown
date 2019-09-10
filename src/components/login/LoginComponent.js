@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./LoginComponent.css";
 
-import { Grid, Container, Typography } from "@material-ui/core";
+import Logo from "../../screens/logo/TopLogo";
 
-import { ReactComponent as Logo } from "../..//assets/images/iown_logo.svg";
+import { Hidden, Grid, Container, Typography } from "@material-ui/core";
 
 import firebase from "../../Firebase";
 
@@ -47,17 +47,38 @@ class LoginComponent extends Component {
     };
 
     return (
-      <Fragment>
-        <div className="logoContainer">
-          <Logo className="logo" />
-        </div>
+      <>
+        <Logo />
+        <Container maxWidth={"lg"}>
+          <Hidden xsDown>
+            <Grid item xs={12}>
+              <Typography className="brandText" align="center" variant="h2">
+                Track Stocks, Cryptos and Real Estate
+              </Typography>
+              <Typography
+                className="brandTextLower"
+                align="center"
+                variant="h2"
+              >
+                All in one Place.
+              </Typography>
+            </Grid>
+          </Hidden>
 
-        <Container>
-          <Grid item xs={12}>
-            <Typography className="brandText" align="center" variant="h2">
-              Track all Digital Assets in One Place.
-            </Typography>
-          </Grid>
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <Typography className="brandText" align="center" variant="h2">
+                Track Stocks, Cryptos and Real Estate
+              </Typography>
+              <Typography
+                className="brandTextLowerPhone"
+                align="center"
+                variant="h2"
+              >
+                All in one Place.
+              </Typography>
+            </Grid>
+          </Hidden>
 
           <Grid item lg={12} className="loginIcons">
             <button
@@ -79,7 +100,7 @@ class LoginComponent extends Component {
             </button>
           </Grid>
         </Container>
-      </Fragment>
+      </>
     );
   }
 }

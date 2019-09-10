@@ -27,7 +27,7 @@ state.subscribe(
   throttle(() => {
     saveState({ user: state.getState().user });
   }),
-  1500
+  3000
 );
 
 export default () => {
