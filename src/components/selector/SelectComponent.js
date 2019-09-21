@@ -5,7 +5,8 @@ export default class SelectComponent extends React.PureComponent {
   styles = {
     container: {
       margin: "auto",
-      width: 260
+      width: 260,
+      textAlign: "center"
     }
   };
 
@@ -13,7 +14,6 @@ export default class SelectComponent extends React.PureComponent {
     return (
       <div style={this.styles.container}>
         <Select
-          style={{ textAlign: "center" }}
           autoWidth={true}
           onChange={e => this.props.handleSymbolChange(e)}
           options={this.props.options}

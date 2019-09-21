@@ -25,9 +25,11 @@ const state = createStore(
 
 state.subscribe(
   throttle(() => {
-    saveState({ user: state.getState().user });
+    saveState({
+      user: state.getState().user
+    });
   }),
-  3000
+  8000
 );
 
 export default () => {

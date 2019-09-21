@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import axios from "axios";
 
 import { Typography } from "@material-ui/core";
@@ -19,7 +19,12 @@ import AddButton from "../../../screens/buttons/AddButton";
 import AddButtonFab from "../../../screens/buttons/AddButtonFab";
 import AddStockComponent from "../../add/AddStockComponent";
 
-class TotalIownComponent extends React.PureComponent {
+class TotalIownComponent extends PureComponent {
+  componentDidMount() {
+    this.fetchPrices();
+    setInterval(this.fetchPrices, 15000);
+  }
+
   fetchPrices = () => {
     if (this.props.cryptos.length === 0) return;
     this.props.dispatch(fetchCryptoPricesStart());
@@ -39,13 +44,7 @@ class TotalIownComponent extends React.PureComponent {
       .catch(err => this.props.dispatch(fetchCryptoPriceError(err.message)));
   };
 
-  componentDidMount() {
-    this.fetchPrices();
-    setInterval(this.fetchPrices, 15000);
-  }
-
   render() {
-    console.log(this.props.cryptos);
     const addCrypto = () => {
       this.props.dispatch(addCryptoStart());
     };

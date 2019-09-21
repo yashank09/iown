@@ -196,7 +196,6 @@ const TabComponent = props => {
               }
               aria-label="Estate IOWN"
               {...a11yProps(3)}
-              //style={getStyle(value === 3)}
             />
           </Tabs>
         </Grid>
@@ -214,6 +213,9 @@ const TabComponent = props => {
           Coming Soon!
         </TabPanel>
         <TabPanel value={value} index={2}>
+          Coming Soon!
+        </TabPanel>
+        <TabPanel value={value} index={3}>
           Coming Soon!
         </TabPanel>
       </Grid>

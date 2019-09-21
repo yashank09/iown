@@ -1,9 +1,18 @@
+export const FETCH_CRYPTO_DATABASE = "FETCH_CRYPTO_DATABASE";
+
 export const FETCH_CRYPTO_PRICES_START = "FETCH_CRYPTO_PRICES_START";
 export const FETCH_CRYPTO_PRICES_SUCCESS = "FETCH_CRYPTO_PRICES_SUCCESS";
 export const FETCH_CRYPTO_PRICES_ERROR = "FETCH_CRYPTO_PRICES_ERROR";
 
 export const ADD_CRYPTO_START = "ADD_CRYPTO_START";
 export const ADD_CRYPTO_SUCCESS = "ADD_CRYPTO_SUCSESS";
+
+export function fetchCryptoDatabase(crypto) {
+  return {
+    type: FETCH_CRYPTO_DATABASE,
+    payload: crypto
+  };
+}
 
 export function fetchCryptoPricesStart() {
   return {

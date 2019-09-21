@@ -34,7 +34,7 @@ const styles = {
     fontSize: 18,
     color: "red",
     backgroundColor: "white",
-    paddingLeft: 120
+    paddingLeft: 110
   },
   formContainer: {
     backgroundColor: "#14111a",
@@ -47,7 +47,7 @@ class AddCryptoComponent extends React.PureComponent {
   state = {
     options: data,
     cryptoSymbol: null,
-    hasCryptoName: null,
+    cryptoName: null,
     totalAmount: 0,
     quantity: 0,
     currentPrice: null,
@@ -66,7 +66,7 @@ class AddCryptoComponent extends React.PureComponent {
 
   handleSymbolChange = selectedOption => {
     this.setState({
-      hasCryptoName: selectedOption.label,
+      cryptoName: selectedOption.label,
       cryptoSymbol: selectedOption.value
     });
   };
@@ -76,7 +76,12 @@ class AddCryptoComponent extends React.PureComponent {
     const regex = /^\d*\.?\d*$/;
     const amount = regex.exec(value);
     console.log(amount);
-    this.setState({ totalAmount: amount });
+    if (amount === null) {
+      alert("Please Enter Valid Number");
+      this.setState({ totalAmount: 0 });
+    } else {
+      this.setState({ totalAmount: amount[0] });
+    }
   };
 
   handleAddedProfitChange = value => {
@@ -91,7 +96,13 @@ class AddCryptoComponent extends React.PureComponent {
       .get(
         `https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=USD`
       )
-      .then(res => this.setState({ currentPrice: res.data["USD"] }))
+      .then(res => {
+        if (res.data["USD"] === undefined) {
+          alert("Crypto Not Found.");
+        } else {
+          this.setState({ currentPrice: res.data["USD"] });
+        }
+      })
       .then(this.computeCurrentTotal);
   };
 
@@ -110,7 +121,7 @@ class AddCryptoComponent extends React.PureComponent {
 
   submitAddCrypto = () => {
     const {
-      hasCryptoName,
+      cryptoName,
       cryptoSymbol,
       quantity,
       totalAmount,
@@ -121,16 +132,17 @@ class AddCryptoComponent extends React.PureComponent {
     const database = firebase.database();
     const timeStamp = new Date().toLocaleDateString();
     database.ref("users/" + userId + "/cryptos").push({
-      hasCryptoName,
+      cryptoName,
       cryptoSymbol,
       quantity,
       totalAmount,
       addedProfit,
       timeStamp
     });
+
     this.props.dispatch(
       addCryptoSuccess({
-        hasCryptoName,
+        cryptoName,
         cryptoSymbol,
         quantity,
         totalAmount,
@@ -159,7 +171,7 @@ class AddCryptoComponent extends React.PureComponent {
             />
           </Grid>
         </Grid>
-        {this.state.hasCryptoName !== null && (
+        {this.state.cryptoName !== null && (
           <>
             <Grid container style={{ marginBottom: 32 }}>
               <Grid item xs={12} sm={6}>

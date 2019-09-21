@@ -1,4 +1,5 @@
 import {
+  FETCH_CRYPTO_DATABASE,
   FETCH_CRYPTO_PRICES_START,
   FETCH_CRYPTO_PRICES_SUCCESS,
   FETCH_CRYPTO_PRICES_ERROR,
@@ -7,23 +8,7 @@ import {
 } from "../actions/cryptoActions";
 
 const initialState = {
-  cryptos: [
-    // {
-    //   symbol: "ETH",
-    //   quantity: 12,
-    //   bought_for: 120.21
-    // },
-    // {
-    //   symbol: "BTC",
-    //   quantity: 3,
-    //   bought_for: 7800.0
-    // },
-    // {
-    //   symbol: "XRP",
-    //   quantity: 128,
-    //   bought_for: 1.43
-    // }
-  ],
+  cryptos: [],
   currency: "USD",
   isLoading: false,
   isAddingCrypto: false,
@@ -32,6 +17,8 @@ const initialState = {
 
 export const cryptoReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_CRYPTO_DATABASE:
+      return { ...state, cryptos: [...state.cryptos, action.payload] };
     case FETCH_CRYPTO_PRICES_START:
       return { ...state, isLoading: true };
     case FETCH_CRYPTO_PRICES_SUCCESS:
