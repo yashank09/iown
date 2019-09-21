@@ -58,7 +58,9 @@ class TotalIownComponent extends PureComponent {
       <AddStockComponent />
     ) : this.props.cryptos.length || this.props.stocks.length ? (
       <>
-        <PieChart data={[["Blueberry", 44], ["Strawberry", 23]]} />
+        <PieChart
+          data={this.props.cryptos.map(i => [i.cryptoSymbol, i.totalAmount])}
+        />
         <AddButtonFab addCrypto={addCrypto} />
       </>
     ) : (
