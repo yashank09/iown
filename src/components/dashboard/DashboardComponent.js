@@ -28,9 +28,8 @@ class DashboardComponent extends PureComponent {
                 const {
                   cryptoName,
                   cryptoSymbol,
-                  quantity,
                   totalAmount,
-                  addedProfit,
+                  startingValue,
                   timeStamp
                 } = i;
 
@@ -38,9 +37,8 @@ class DashboardComponent extends PureComponent {
                   fetchCryptoDatabase({
                     cryptoName,
                     cryptoSymbol,
-                    quantity,
                     totalAmount,
-                    addedProfit,
+                    startingValue,
                     timeStamp
                   })
                 );

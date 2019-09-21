@@ -1,13 +1,11 @@
 import React from "react";
 
 import { Grid, Typography, Button, Tooltip, Input } from "@material-ui/core";
-import CurrencyInput from "react-currency-input";
 
 import axios from "axios";
 
 import firebase from "../../Firebase";
 
-import * as currency from "currency.js";
 import data from "../../assets/coinSymbolOptions.json";
 
 import SelectComponent from "../selector/SelectComponent";
@@ -49,9 +47,8 @@ class AddCryptoComponent extends React.PureComponent {
     cryptoSymbol: null,
     cryptoName: null,
     totalAmount: 0,
-    quantity: 0,
     currentPrice: null,
-    addedProfit: 0
+    startingValue: 0
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -80,14 +77,9 @@ class AddCryptoComponent extends React.PureComponent {
       alert("Please Enter Valid Number");
       this.setState({ totalAmount: 0 });
     } else {
-      this.setState({ totalAmount: amount[0] });
+      const startingValue = amount[0] * this.state.currentPrice;
+      this.setState({ totalAmount: amount[0], startingValue: startingValue });
     }
-  };
-
-  handleAddedProfitChange = value => {
-    // eslint-disable-next-line
-    const amount = Number(value.replace(/[^0-9\.]+/g, ""));
-    this.setState({ addedProfit: amount });
   };
 
   getCoinValue = symbol => {
@@ -102,31 +94,11 @@ class AddCryptoComponent extends React.PureComponent {
         } else {
           this.setState({ currentPrice: res.data["USD"] });
         }
-      })
-      .then(this.computeCurrentTotal);
-  };
-
-  computeCurrentTotal = () => {
-    const totalAmountFormated = currency(this.state.totalAmount, {
-      precision: 6
-    });
-    const currentPriceFormatted = currency(this.state.currentPrice, {
-      precision: 6
-    });
-    const quantity = totalAmountFormated.divide(currentPriceFormatted);
-    this.setState({
-      quantity: quantity.value
-    });
+      });
   };
 
   submitAddCrypto = () => {
-    const {
-      cryptoName,
-      cryptoSymbol,
-      quantity,
-      totalAmount,
-      addedProfit
-    } = this.state;
+    const { cryptoName, cryptoSymbol, totalAmount, startingValue } = this.state;
 
     const userId = firebase.auth().currentUser.uid;
     const database = firebase.database();
@@ -134,20 +106,18 @@ class AddCryptoComponent extends React.PureComponent {
     database.ref("users/" + userId + "/cryptos").push({
       cryptoName,
       cryptoSymbol,
-      quantity,
       totalAmount,
-      addedProfit,
-      timeStamp
+      timeStamp,
+      startingValue
     });
 
     this.props.dispatch(
       addCryptoSuccess({
         cryptoName,
         cryptoSymbol,
-        quantity,
         totalAmount,
-        addedProfit,
-        timeStamp
+        timeStamp,
+        startingValue
       })
     );
   };
@@ -161,7 +131,7 @@ class AddCryptoComponent extends React.PureComponent {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography style={{ marginBottom: 28 }}>
-              Select Crypto to Add
+              Enter Crypto Symbol
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -176,11 +146,11 @@ class AddCryptoComponent extends React.PureComponent {
             <Grid container style={{ marginBottom: 32 }}>
               <Grid item xs={12} sm={6}>
                 <Tooltip
-                  title="Enter total number of Crypto"
-                  aria-label="Enter total number of Crypto"
+                  title="Enter current total amount of Crypto"
+                  aria-label="Enter Current total amount of Crypto"
                 >
                   <Typography style={{ paddingTop: 23, marginBottom: 28 }}>
-                    Total Number of Crypto
+                    Total Amount of Crypto
                   </Typography>
                 </Tooltip>
               </Grid>
@@ -191,29 +161,13 @@ class AddCryptoComponent extends React.PureComponent {
               />
             </Grid>
 
-            <Grid container style={{ marginBottom: 32 }}>
-              <Grid item xs={12} sm={6}>
-                <Typography style={{ paddingTop: 6, marginBottom: 28 }}>
-                  Current Profit/Loss from Asset
-                </Typography>
-              </Grid>
-              <CurrencyInput
-                prefix="$"
-                style={styles.currencyInput}
-                value={this.state.addedProfit}
-                onChangeEvent={e =>
-                  this.handleAddedProfitChange(e.target.value)
-                }
-              />
-            </Grid>
-
             <Grid container style={styles.formContainer}>
               <Grid item xs={6}>
                 <Typography style={{ paddingTop: 12, marginBottom: 8 }}>
-                  Approx. Quantity of IOWN
+                  Est. Value of Crypto
                 </Typography>
                 <Typography style={{ paddingBottom: 12 }}>
-                  {this.state.quantity}
+                  $ {this.state.startingValue}
                 </Typography>
               </Grid>
 
