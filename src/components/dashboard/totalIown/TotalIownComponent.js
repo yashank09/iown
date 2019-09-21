@@ -19,8 +19,6 @@ import AddButton from "../../../screens/buttons/AddButton";
 import AddButtonFab from "../../../screens/buttons/AddButtonFab";
 import AddStockComponent from "../../add/AddStockComponent";
 
-import { VictoryPie } from "victory";
-
 class TotalIownComponent extends PureComponent {
   componentDidMount() {
     this.fetchPrices();
@@ -57,16 +55,6 @@ class TotalIownComponent extends PureComponent {
       <AddStockComponent />
     ) : this.props.cryptos.length || this.props.stocks.length ? (
       <>
-        <VictoryPie
-          data={[
-            { x: "Cats", y: 35 },
-            { x: "Dogs", y: 40 },
-            { x: "Birds", y: 55 }
-          ]}
-          animate={{
-            duration: 2000
-          }}
-        />
         <AddButtonFab addCrypto={addCrypto} />
       </>
     ) : (
