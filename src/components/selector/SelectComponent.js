@@ -5,7 +5,7 @@ export default class SelectComponent extends React.PureComponent {
   styles = {
     container: {
       margin: "auto",
-      width: 240
+      width: 260
     }
   };
 

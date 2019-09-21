@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Typography, Button } from "@material-ui/core";
+import { Grid, Typography, Button, Tooltip, Input } from "@material-ui/core";
 import CurrencyInput from "react-currency-input";
 
 import axios from "axios";
@@ -18,13 +18,23 @@ import { addCryptoSuccess } from "../../actions/cryptoActions";
 const styles = {
   currencyInput: {
     margin: "auto",
-    width: 240,
-    height: 38,
+    width: 260,
+    height: 40,
     borderRadius: 8,
     fontSize: 18,
     color: "red",
     backgroundColor: "white",
     textAlign: "center"
+  },
+  input: {
+    margin: "auto",
+    width: 260,
+    height: 40,
+    borderRadius: 8,
+    fontSize: 18,
+    color: "red",
+    backgroundColor: "white",
+    paddingLeft: 120
   },
   formContainer: {
     backgroundColor: "#14111a",
@@ -38,17 +48,17 @@ class AddCryptoComponent extends React.PureComponent {
     options: data,
     cryptoSymbol: null,
     hasCryptoName: null,
-    startingCurrentValue: 0,
+    totalAmount: 0,
     quantity: 0,
     currentPrice: null,
     addedProfit: 0
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { cryptoSymbol, startingCurrentValue } = this.state;
+    const { cryptoSymbol, totalAmount } = this.state;
     if (
       prevState.cryptoSymbol !== cryptoSymbol ||
-      prevState.startingCurrentValue !== startingCurrentValue
+      prevState.totalAmount !== totalAmount
     ) {
       this.getCoinValue(cryptoSymbol);
     }
@@ -62,11 +72,15 @@ class AddCryptoComponent extends React.PureComponent {
   };
 
   handleAmountChange = value => {
-    const amount = Number(value.replace(/[^0-9\.]+/g, ""));
-    this.setState({ startingCurrentValue: amount });
+    // eslint-disable-next-line
+    const regex = /^\d*\.?\d*$/;
+    const amount = regex.exec(value);
+    console.log(amount);
+    this.setState({ totalAmount: amount });
   };
 
   handleAddedProfitChange = value => {
+    // eslint-disable-next-line
     const amount = Number(value.replace(/[^0-9\.]+/g, ""));
     this.setState({ addedProfit: amount });
   };
@@ -82,16 +96,13 @@ class AddCryptoComponent extends React.PureComponent {
   };
 
   computeCurrentTotal = () => {
-    const startingCurrentValueFormated = currency(
-      this.state.startingCurrentValue,
-      {
-        precision: 6
-      }
-    );
+    const totalAmountFormated = currency(this.state.totalAmount, {
+      precision: 6
+    });
     const currentPriceFormatted = currency(this.state.currentPrice, {
       precision: 6
     });
-    const quantity = startingCurrentValueFormated.divide(currentPriceFormatted);
+    const quantity = totalAmountFormated.divide(currentPriceFormatted);
     this.setState({
       quantity: quantity.value
     });
@@ -102,7 +113,7 @@ class AddCryptoComponent extends React.PureComponent {
       hasCryptoName,
       cryptoSymbol,
       quantity,
-      startingCurrentValue,
+      totalAmount,
       addedProfit
     } = this.state;
 
@@ -113,7 +124,7 @@ class AddCryptoComponent extends React.PureComponent {
       hasCryptoName,
       cryptoSymbol,
       quantity,
-      startingCurrentValue,
+      totalAmount,
       addedProfit,
       timeStamp
     });
@@ -122,7 +133,7 @@ class AddCryptoComponent extends React.PureComponent {
         hasCryptoName,
         cryptoSymbol,
         quantity,
-        startingCurrentValue,
+        totalAmount,
         addedProfit,
         timeStamp
       })
@@ -132,13 +143,13 @@ class AddCryptoComponent extends React.PureComponent {
   render() {
     return (
       <>
-        <Grid container style={{ marginBottom: 32 }}>
+        <Grid container>
           <Grid item xs={12}>
             <Typography variant="h3">Add IOWN</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography style={{ paddingTop: 10 }}>
-              Select invested Crypto Currency
+            <Typography style={{ marginBottom: 28 }}>
+              Select Crypto to Add
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -152,22 +163,26 @@ class AddCryptoComponent extends React.PureComponent {
           <>
             <Grid container style={{ marginBottom: 32 }}>
               <Grid item xs={12} sm={6}>
-                <Typography style={{ paddingTop: 23, marginBottom: 32 }}>
-                  Current Total Value of Asset
-                </Typography>
+                <Tooltip
+                  title="Enter total number of Crypto"
+                  aria-label="Enter total number of Crypto"
+                >
+                  <Typography style={{ paddingTop: 23, marginBottom: 28 }}>
+                    Total Number of Crypto
+                  </Typography>
+                </Tooltip>
               </Grid>
-              <CurrencyInput
-                prefix="$"
-                style={styles.currencyInput}
-                value={this.state.startingCurrentValue}
-                onChangeEvent={e => this.handleAmountChange(e.target.value)}
+              <Input
+                style={styles.input}
+                value={this.state.totalAmount}
+                onChange={e => this.handleAmountChange(e.target.value)}
               />
             </Grid>
 
             <Grid container style={{ marginBottom: 32 }}>
               <Grid item xs={12} sm={6}>
-                <Typography style={{ paddingTop: 6, marginBottom: 32 }}>
-                  Enter Current Profit/Loss from Asset
+                <Typography style={{ paddingTop: 6, marginBottom: 28 }}>
+                  Current Profit/Loss from Asset
                 </Typography>
               </Grid>
               <CurrencyInput
@@ -182,7 +197,7 @@ class AddCryptoComponent extends React.PureComponent {
 
             <Grid container style={styles.formContainer}>
               <Grid item xs={6}>
-                <Typography style={{ paddingTop: 12, marginBottom: 32 }}>
+                <Typography style={{ paddingTop: 12, marginBottom: 8 }}>
                   Approx. Quantity of IOWN
                 </Typography>
                 <Typography style={{ paddingBottom: 12 }}>
@@ -192,7 +207,7 @@ class AddCryptoComponent extends React.PureComponent {
 
               <Grid item xs={6}>
                 <Button
-                  style={{ marginTop: 23 }}
+                  style={{ marginTop: 28 }}
                   variant="contained"
                   color="primary"
                   onClick={this.submitAddCrypto}
@@ -202,7 +217,7 @@ class AddCryptoComponent extends React.PureComponent {
               </Grid>
             </Grid>
 
-            <Grid container style={{ marginBottom: 32 }}></Grid>
+            <Grid container style={{ marginBottom: 28 }}></Grid>
           </>
         )}
         {this.state.currentPrice !== null && <></>}

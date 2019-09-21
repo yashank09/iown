@@ -1,14 +1,9 @@
 import React from "react";
-import { Typography, TextField } from "@material-ui/core";
+import { Grid, Typography, TextField } from "@material-ui/core";
 
 export default () => {
-  const API_KEY =
-    "hRb4i6EsMpQfIt7Obykkhh5FW8a7ULsU9TQft6PRUSJcDy6YIL2gb0U6w6bE";
-  state = {
-    hasStockName: null,
-    stockIdName: null,
-    symbolName: null
-  };
+  // const API_KEY =
+  //   "hRb4i6EsMpQfIt7Obykkhh5FW8a7ULsU9TQft6PRUSJcDy6YIL2gb0U6w6bE";
 
   return (
     <>

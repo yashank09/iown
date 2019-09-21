@@ -85,25 +85,53 @@ const TabComponent = props => {
             indicatorColor="primary"
           >
             <Tab
-              icon={<img src={Logo} width={58} height={58} />}
+              icon={
+                <img
+                  src={Logo}
+                  width={54}
+                  height={54}
+                  alt="Tab Icon for Total IOWN"
+                />
+              }
               aria-label="Total IOWN"
               {...a11yProps(0)}
               style={getStyle(value === 0)}
             />
             <Tab
-              icon={<img src={CryptoIcon} width={58} height={58} />}
+              icon={
+                <img
+                  src={CryptoIcon}
+                  width={42}
+                  height={42}
+                  alt="Tab Icon for Crypto"
+                />
+              }
               aria-label="Crypto IOWN"
               {...a11yProps(1)}
               style={getStyle(value === 1)}
             />
             <Tab
-              icon={<img src={StocksIcon} width={48} height={48} />}
+              icon={
+                <img
+                  src={StocksIcon}
+                  width={42}
+                  height={42}
+                  alt="Tab Icon for Stocks"
+                />
+              }
               aria-label="Stocks IOWN"
               {...a11yProps(2)}
               style={getStyle(value === 2)}
             />
             <Tab
-              icon={<img src={EstateIcon} width={52} height={52} />}
+              icon={
+                <img
+                  src={EstateIcon}
+                  width={42}
+                  height={42}
+                  alt="Tab Icon for Estate"
+                />
+              }
               aria-label="Estate IOWN"
               {...a11yProps(3)}
               style={getStyle(value === 3)}
@@ -122,22 +150,50 @@ const TabComponent = props => {
             indicatorColor="primary"
           >
             <Tab
-              icon={<img src={Logo} width={58} height={58} />}
+              icon={
+                <img
+                  src={Logo}
+                  width={54}
+                  height={54}
+                  alt="Tab Icon for Total IOWN"
+                />
+              }
               aria-label="Total IOWN"
               {...a11yProps(0)}
             />
             <Tab
-              icon={<img src={CryptoIcon} width={58} height={58} />}
+              icon={
+                <img
+                  src={CryptoIcon}
+                  width={42}
+                  height={42}
+                  alt="Tab Icon for Crypto"
+                />
+              }
               aria-label="Crypto IOWN"
               {...a11yProps(1)}
             />
             <Tab
-              icon={<img src={StocksIcon} width={48} height={48} />}
+              icon={
+                <img
+                  src={StocksIcon}
+                  width={48}
+                  height={48}
+                  alt="Tab Icon for Stocks"
+                />
+              }
               aria-label="Stocks IOWN"
               {...a11yProps(2)}
             />
             <Tab
-              icon={<img src={EstateIcon} width={52} height={52} />}
+              icon={
+                <img
+                  src={EstateIcon}
+                  width={52}
+                  height={52}
+                  alt="Tab Icon for Estate"
+                />
+              }
               aria-label="Estate IOWN"
               {...a11yProps(3)}
               //style={getStyle(value === 3)}
