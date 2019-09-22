@@ -14,18 +14,16 @@ import {
   addCryptoStart
 } from "../../../actions/cryptoActions";
 
+import TotalIownGraphs from "./TotalIownGraphs";
 import AddCryptoComponent from "../../add/AddCryptoComponent";
 import AddButton from "../../../screens/buttons/AddButton";
 import AddButtonFab from "../../../screens/buttons/AddButtonFab";
 import AddStockComponent from "../../add/AddStockComponent";
 
-import { PieChart } from "react-chartkick";
-import "chart.js";
-
 class TotalIownComponent extends PureComponent {
   componentDidMount() {
     this.fetchPrices();
-    setInterval(this.fetchPrices, 15000);
+    setInterval(this.fetchPrices, 8000);
   }
 
   fetchPrices = () => {
@@ -58,15 +56,13 @@ class TotalIownComponent extends PureComponent {
       <AddStockComponent />
     ) : this.props.cryptos.length || this.props.stocks.length ? (
       <>
-        <PieChart
-          data={this.props.cryptos.map(i => [i.cryptoSymbol, i.totalAmount])}
-        />
+        <TotalIownGraphs />
         <AddButtonFab addCrypto={addCrypto} />
       </>
     ) : (
       <>
-        <Typography variant="h3">Total IOWN</Typography>
-        <p>
+        <Typography variant="h2">Total IOWN</Typography>
+        <p style={{ fontSize: 23 }}>
           Add Digital Assets and Track their Values. <br /> Let's add your first
           IOWN.
         </p>

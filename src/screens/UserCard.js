@@ -10,10 +10,19 @@ const styles = {
     marginTop: 28,
     marginLeft: 120
   },
-  userPictureContainer: {},
-  userNameContainer: {
-    paddingTop: 32,
-    paddingLeft: 12
+  userPictureContainer: {
+    textAlign: "center"
+  },
+  userNameContainerXs: {
+    textAlign: "center",
+    marginTop: 32,
+    paddingLeft: 12,
+    paddingBottom: 18
+  },
+  userNameContainerSm: {
+    textAlign: "center",
+    paddingLeft: 12,
+    paddingBottom: 18
   }
 };
 
@@ -25,7 +34,7 @@ export default props => (
           <ProfilePicture url={props.userPicture} />
         </div>
 
-        <div style={styles.userNameContainer}>
+        <div style={styles.userNameContainerXs}>
           <Typography>Welcome, {props.userName}</Typography>
         </div>
       </div>
@@ -33,13 +42,13 @@ export default props => (
 
     <Hidden smUp>
       <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={12}>
           <div style={styles.userPictureContainer}>
             <ProfilePicture url={props.userPicture} />
           </div>
         </Grid>
-        <Grid item xs={8}>
-          <div style={styles.userNameContainer}>
+        <Grid item xs={12}>
+          <div style={styles.userNameContainerSm}>
             <Typography>Welcome, {props.userName}</Typography>
           </div>
         </Grid>

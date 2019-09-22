@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useTheme, Fab, Menu, MenuItem } from "@material-ui/core";
+import { Fab, Menu, MenuItem } from "@material-ui/core";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 
 export default props => {
@@ -14,12 +14,12 @@ export default props => {
     setAnchorEl(null);
   }
 
-  const theme = useTheme();
   const styles = {
     addIcon: {
-      left: "50%",
-      marginTop: "68%",
-      backgroundColor: theme.palette.secondary.main,
+      position: "fixed",
+      top: "86%",
+      left: "80%",
+      zIndex: 1001,
       color: "white",
       width: 68,
       height: 68
@@ -28,7 +28,12 @@ export default props => {
 
   return (
     <>
-      <Fab aria-label="Add IOWN" style={styles.addIcon} onClick={handleClick}>
+      <Fab
+        color="primary"
+        aria-label="Add IOWN"
+        style={styles.addIcon}
+        onClick={handleClick}
+      >
         <AddRoundedIcon fontSize="large" />
       </Fab>
 

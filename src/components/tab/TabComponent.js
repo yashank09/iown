@@ -57,8 +57,12 @@ const styles = {
   notActiveTabs: {
     opacity: 0.5
   },
+  tabContainer: {
+    marginLeft: 42
+  },
   tabContentContainer: {
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 28
   }
 };
 
@@ -74,7 +78,7 @@ const TabComponent = props => {
   return (
     <Grid container style={styles.container}>
       <Hidden xsDown>
-        <Grid item xs={12} sm={3}>
+        <Grid item sm={2} style={styles.tabContainer}>
           <Tabs
             orientation="vertical"
             variant="scrollable"
@@ -165,8 +169,8 @@ const TabComponent = props => {
               icon={
                 <img
                   src={CryptoIcon}
-                  width={42}
-                  height={42}
+                  width={43}
+                  height={43}
                   alt="Tab Icon for Crypto"
                 />
               }
@@ -177,8 +181,8 @@ const TabComponent = props => {
               icon={
                 <img
                   src={StocksIcon}
-                  width={48}
-                  height={48}
+                  width={44}
+                  height={44}
                   alt="Tab Icon for Stocks"
                 />
               }
@@ -189,8 +193,8 @@ const TabComponent = props => {
               icon={
                 <img
                   src={EstateIcon}
-                  width={52}
-                  height={52}
+                  width={48}
+                  height={48}
                   alt="Tab Icon for Estate"
                 />
               }

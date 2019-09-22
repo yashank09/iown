@@ -72,7 +72,6 @@ class AddCryptoComponent extends React.PureComponent {
     // eslint-disable-next-line
     const regex = /^\d*\.?\d*$/;
     const amount = regex.exec(value);
-    console.log(amount);
     if (amount === null) {
       alert("Please Enter Valid Number");
       this.setState({ totalAmount: 0 });

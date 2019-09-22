@@ -11,7 +11,7 @@ export default props => {
   const styles = {
     addIcon: {
       margin: 32,
-      marginTop: 72,
+      marginTop: 48,
       backgroundColor: theme.palette.secondary.main,
       color: "white"
     }

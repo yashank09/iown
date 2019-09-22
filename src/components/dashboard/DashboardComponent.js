@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 
-import { Container } from "@material-ui/core";
-
 import UserCard from "../../screens/UserCard";
 import TabComponent from "../tab/TabComponent";
 
@@ -18,6 +16,7 @@ class DashboardComponent extends PureComponent {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const userId = user.uid;
+        console.log(userId);
         const database = firebase.database();
         database
           .ref("/users/" + userId + "/cryptos/")
@@ -55,13 +54,13 @@ class DashboardComponent extends PureComponent {
 
   render() {
     return (
-      <Container maxWidth="lg">
+      <>
         <UserCard
           userName={this.props.userName}
           userPicture={this.props.userPicture}
         />
         <TabComponent />
-      </Container>
+      </>
     );
   }
 }
