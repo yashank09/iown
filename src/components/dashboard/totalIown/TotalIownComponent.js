@@ -22,8 +22,7 @@ import AddStockComponent from "../../add/AddStockComponent";
 
 class TotalIownComponent extends PureComponent {
   componentDidMount() {
-    this.fetchPrices();
-    setInterval(this.fetchPrices, 8000);
+    setInterval(this.fetchPrices, 15000);
   }
 
   fetchPrices = () => {
@@ -46,6 +45,7 @@ class TotalIownComponent extends PureComponent {
   };
 
   render() {
+    this.fetchPrices();
     const addCrypto = () => {
       this.props.dispatch(addCryptoStart());
     };
