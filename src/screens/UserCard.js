@@ -13,16 +13,15 @@ const styles = {
   userPictureContainer: {
     textAlign: "center"
   },
-  userNameContainerXs: {
+  userNameContainer: {
     textAlign: "center",
     marginTop: 32,
-    paddingLeft: 12,
-    paddingBottom: 18
+    paddingLeft: 12
   },
   userNameContainerSm: {
     textAlign: "center",
     paddingLeft: 12,
-    paddingBottom: 18
+    paddingBottom: 12
   }
 };
 
@@ -34,7 +33,7 @@ export default props => (
           <ProfilePicture url={props.userPicture} />
         </div>
 
-        <div style={styles.userNameContainerXs}>
+        <div style={styles.userNameContainer}>
           <Typography>Welcome, {props.userName}</Typography>
         </div>
       </div>

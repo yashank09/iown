@@ -61,8 +61,7 @@ const styles = {
     marginLeft: 42
   },
   tabContentContainer: {
-    textAlign: "center",
-    marginBottom: 28
+    textAlign: "center"
   }
 };
 
@@ -75,6 +74,7 @@ const TabComponent = props => {
 
   const getStyle = isActive =>
     isActive ? styles.activeTab : styles.notActiveTabs;
+
   return (
     <Grid container style={styles.container}>
       <Hidden xsDown>
@@ -164,6 +164,7 @@ const TabComponent = props => {
               }
               aria-label="Total IOWN"
               {...a11yProps(0)}
+              style={getStyle(value === 0)}
             />
             <Tab
               icon={
@@ -176,6 +177,7 @@ const TabComponent = props => {
               }
               aria-label="Crypto IOWN"
               {...a11yProps(1)}
+              style={getStyle(value === 1)}
             />
             <Tab
               icon={
@@ -188,6 +190,7 @@ const TabComponent = props => {
               }
               aria-label="Stocks IOWN"
               {...a11yProps(2)}
+              style={getStyle(value === 2)}
             />
             <Tab
               icon={
@@ -200,6 +203,7 @@ const TabComponent = props => {
               }
               aria-label="Estate IOWN"
               {...a11yProps(3)}
+              style={getStyle(value === 3)}
             />
           </Tabs>
         </Grid>

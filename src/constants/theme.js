@@ -12,8 +12,7 @@ export default createMuiTheme({
       fontSize: "3rem"
     },
     h3: {
-      fontSize: "2.5rem",
-      marginBottom: 56
+      fontSize: "2.5rem"
     }
   }
 });
