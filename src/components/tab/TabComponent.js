@@ -157,8 +157,8 @@ const TabComponent = props => {
               icon={
                 <img
                   src={Logo}
-                  width={54}
-                  height={54}
+                  width={50}
+                  height={50}
                   alt="Tab Icon for Total IOWN"
                 />
               }
@@ -170,8 +170,8 @@ const TabComponent = props => {
               icon={
                 <img
                   src={CryptoIcon}
-                  width={43}
-                  height={43}
+                  width={46}
+                  height={46}
                   alt="Tab Icon for Crypto"
                 />
               }
@@ -184,7 +184,7 @@ const TabComponent = props => {
                 <img
                   src={StocksIcon}
                   width={44}
-                  height={44}
+                  height={42}
                   alt="Tab Icon for Stocks"
                 />
               }
@@ -196,7 +196,7 @@ const TabComponent = props => {
               icon={
                 <img
                   src={EstateIcon}
-                  width={48}
+                  width={46}
                   height={48}
                   alt="Tab Icon for Estate"
                 />

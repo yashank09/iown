@@ -125,7 +125,7 @@ class AddCryptoComponent extends React.PureComponent {
     return (
       <>
         <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{ marginBottom: 28 }}>
             <Typography variant="h3">Add IOWN</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>

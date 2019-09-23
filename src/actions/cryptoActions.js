@@ -1,4 +1,4 @@
-export const FETCH_CRYPTO_DATABASE = "FETCH_CRYPTO_DATABASE";
+import firebase from "../Firebase";
 
 export const FETCH_CRYPTO_PRICES_START = "FETCH_CRYPTO_PRICES_START";
 export const FETCH_CRYPTO_PRICES_SUCCESS = "FETCH_CRYPTO_PRICES_SUCCESS";
@@ -7,10 +7,55 @@ export const FETCH_CRYPTO_PRICES_ERROR = "FETCH_CRYPTO_PRICES_ERROR";
 export const ADD_CRYPTO_START = "ADD_CRYPTO_START";
 export const ADD_CRYPTO_SUCCESS = "ADD_CRYPTO_SUCSESS";
 
-export function fetchCryptoDatabase(crypto) {
+export const FETCH_DATA_PENDING = "FETCH_DATA_PENDING";
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_ERROR = "FETCH_DATA_ERROR";
+
+export function fetchDataPending() {
   return {
-    type: FETCH_CRYPTO_DATABASE,
-    payload: crypto
+    type: FETCH_DATA_PENDING
+  };
+}
+
+export function fetchDataSuccess(cryptos) {
+  return {
+    type: FETCH_DATA_SUCCESS,
+    payload: cryptos
+  };
+}
+
+export function fetchDataError(error) {
+  return {
+    type: FETCH_DATA_ERROR,
+    payload: error
+  };
+}
+
+export function fetchData() {
+  return dispatch => {
+    const data = [];
+    const fetchedData = [];
+    dispatch(fetchDataPending());
+    // firebase.auth().onAuthStateChanged(user => {
+    //   userId = user.uid;
+    // });
+    const ref = firebase
+      .database()
+      .ref("/users/" + "01HIDyxL66T9XvryDvsX1JEzoDZ2" + "/cryptos/");
+
+    ref
+      .once("value", snapshot => {
+        if (snapshot && snapshot.val()) {
+          snapshot.forEach(i => {
+            var items = i.val();
+            data.push(items);
+          });
+          for (var i = 0; i < data.length; i++) {
+            fetchedData.push(data[i]);
+          }
+        }
+      })
+      .then(() => fetchedData.map(i => dispatch(fetchDataSuccess(i))));
   };
 }
 

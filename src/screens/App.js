@@ -8,9 +8,10 @@ import { ThemeProvider } from "@material-ui/styles/";
 import theme from "../constants/theme";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import { reducers } from "../reducers";
+import thunk from "redux-thunk";
 
 import throttle from "lodash/throttle";
 import { loadState, saveState } from "../localStorage";
@@ -20,7 +21,10 @@ const persistedState = loadState();
 const state = createStore(
   reducers,
   persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 state.subscribe(

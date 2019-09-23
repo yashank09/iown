@@ -14,7 +14,7 @@ import {
   addCryptoStart
 } from "../../../actions/cryptoActions";
 
-import TotalIown from "./TotalIown";
+import TotalIownCharts from "./TotalIownCharts";
 import AddCryptoComponent from "../../add/AddCryptoComponent";
 import AddButton from "../../../screens/buttons/AddButton";
 import AddButtonFab from "../../../screens/buttons/AddButtonFab";
@@ -56,7 +56,7 @@ class TotalIownComponent extends PureComponent {
       <AddStockComponent />
     ) : this.props.cryptos.length || this.props.stocks.length ? (
       <>
-        <TotalIown />
+        <TotalIownCharts />
         <AddButtonFab addCrypto={addCrypto} />
       </>
     ) : (

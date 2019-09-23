@@ -17,7 +17,8 @@
     "react-scripts": "3.0.1",
     "react-windowed-select": "^2.0.0",
     "recharts": "^1.7.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
