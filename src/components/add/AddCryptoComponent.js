@@ -76,8 +76,15 @@ class AddCryptoComponent extends React.PureComponent {
       alert("Please Enter Valid Number");
       this.setState({ totalAmount: 0 });
     } else {
-      const startingValue = amount[0] * this.state.currentPrice;
-      this.setState({ totalAmount: amount[0], startingValue: startingValue });
+      const formatDecimal = /\d+(\.\d{1,2})?/;
+      const startingValue = formatDecimal.exec(
+        amount[0] * this.state.currentPrice
+      );
+      console.log(startingValue);
+      this.setState({
+        totalAmount: amount[0],
+        startingValue: parseFloat(startingValue[0])
+      });
     }
   };
 
