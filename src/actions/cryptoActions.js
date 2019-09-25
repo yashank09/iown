@@ -36,26 +36,27 @@ export function fetchData() {
     const data = [];
     const fetchedData = [];
     dispatch(fetchDataPending());
-    // firebase.auth().onAuthStateChanged(user => {
-    //   userId = user.uid;
-    // });
-    const ref = firebase
-      .database()
-      .ref("/users/" + "01HIDyxL66T9XvryDvsX1JEzoDZ2" + "/cryptos/");
-
-    ref
-      .once("value", snapshot => {
-        if (snapshot && snapshot.val()) {
-          snapshot.forEach(i => {
-            var items = i.val();
-            data.push(items);
-          });
-          for (var i = 0; i < data.length; i++) {
-            fetchedData.push(data[i]);
-          }
-        }
-      })
-      .then(() => fetchedData.map(i => dispatch(fetchDataSuccess(i))));
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const ref = firebase.database().ref("/users/" + user.uid + "/cryptos/");
+        ref
+          .once("value", snapshot => {
+            if (snapshot && snapshot.val()) {
+              snapshot.forEach(i => {
+                var items = i.val();
+                data.push(items);
+              });
+              for (var i = 0; i < data.length; i++) {
+                fetchedData.push(data[i]);
+              }
+            }
+          })
+          .then(() => fetchedData.map(i => dispatch(fetchDataSuccess(i))));
+      } else {
+        alert("Please Refresh Page");
+        return null;
+      }
+    });
   };
 }
 

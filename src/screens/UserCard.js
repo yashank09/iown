@@ -34,7 +34,7 @@ export default props => (
         </div>
 
         <div style={styles.userNameContainer}>
-          <Typography>Welcome, {props.userName}</Typography>
+          <Typography> {props.userName}</Typography>
         </div>
       </div>
     </Hidden>
@@ -48,7 +48,7 @@ export default props => (
         </Grid>
         <Grid item xs={12}>
           <div style={styles.userNameContainerSm}>
-            <Typography>Welcome, {props.userName}</Typography>
+            <Typography>{props.userName}</Typography>
           </div>
         </Grid>
       </Grid>
