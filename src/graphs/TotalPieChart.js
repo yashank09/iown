@@ -22,11 +22,12 @@ export default props => {
   const computeTotalValue = () => {
     var sum = 0;
     props.data.map(i => (sum += i.startingValue));
-    console.log(sum);
+    return sum;
   };
 
+  //Add more colors, more Options
   const COLORS = ["#0088FE", "#FF8042", "#A2D", "#EA0", "#00AE00"];
-  console.log(computeTotalValue());
+
   return (
     <>
       <Hidden xsDown>
@@ -52,12 +53,12 @@ export default props => {
                   />
                 ))}
                 <Label
-                  value="Value"
+                  value={computeTotalValue()}
                   position="center"
-                  style={{ fill: "red" }}
+                  style={{ fill: "#f83566" }}
                 />
               </Pie>
-              <Legend />
+              <Legend iconType="diamond" />
             </PieChart>
           </ResponsiveContainer>
         </Grid>
@@ -79,6 +80,7 @@ export default props => {
                 dataKey="value"
                 label
                 labelLine={false}
+                stroke="none"
               >
                 {props.data.map((entry, index) => (
                   <Cell
@@ -87,12 +89,12 @@ export default props => {
                   />
                 ))}
                 <Label
-                  value="Value"
+                  value={computeTotalValue()}
                   position="center"
-                  style={{ fill: "red" }}
+                  style={{ fill: "#f83566" }}
                 />
               </Pie>
-              <Legend />
+              <Legend iconType="diamond" />
             </PieChart>
           </ResponsiveContainer>
         </Grid>
