@@ -218,13 +218,13 @@ const TabComponent = props => {
           />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Coming Soon!
+          See all Cryptos here.
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Coming Soon!
+          See all Stocks here.
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Coming Soon!
+          See all Real Estates here.
         </TabPanel>
       </Grid>
     </Grid>

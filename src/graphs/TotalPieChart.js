@@ -49,87 +49,41 @@ export default props => {
 
     return (
       <>
-        <Hidden xsDown>
-          <g>
-            <Sector
-              cx={cx}
-              cy={cy}
-              innerRadius={innerRadius}
-              outerRadius={outerRadius}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              fill={fill}
-            />
-            <Sector
-              cx={cx}
-              cy={cy}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              innerRadius={outerRadius + 6}
-              outerRadius={outerRadius + 10}
-              fill={fill}
-            />
-            <path
-              d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-              stroke={fill}
-              fill="none"
-            />
-            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text
-              x={ex + (cos >= 0 ? 1 : -1) * 12}
-              y={ey}
-              textAnchor={textAnchor}
-              fill={fill}
-            >{`$ ${value}`}</text>
-            <text
-              x={ex + (cos >= 0 ? 1 : -1) * 12}
-              y={ey}
-              dy={18}
-              textAnchor={textAnchor}
-              fill={fill}
-            >
-              {`${(percent * 100).toFixed(2)}%`}
-            </text>
-          </g>
-        </Hidden>
-
-        <Hidden smUp>
-          <g>
-            <Sector
-              cx={cx}
-              cy={cy}
-              innerRadius={innerRadius}
-              outerRadius={outerRadius}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              fill={fill}
-            />
-            <Sector
-              cx={cx}
-              cy={cy}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              innerRadius={outerRadius + 6}
-              outerRadius={outerRadius + 10}
-              fill={fill}
-            />
-            <text
-              x={ex + (cos >= 0 ? 1 : -1) * -28}
-              y={ey}
-              textAnchor={textAnchor}
-              fill={fill}
-            >{`$ ${value}`}</text>
-            <text
-              x={ex + (cos >= 0 ? 1 : -1) * -28}
-              y={ey}
-              dy={18}
-              textAnchor={textAnchor}
-              fill={fill}
-            >
-              {`${(percent * 100).toFixed(2)}%`}
-            </text>
-          </g>
-        </Hidden>
+        <g style={{ pointerEvents: "none" }}>
+          <Sector
+            cx={cx}
+            cy={cy}
+            innerRadius={innerRadius}
+            outerRadius={outerRadius}
+            startAngle={startAngle}
+            endAngle={endAngle}
+            fill={fill}
+          />
+          <Sector
+            cx={cx}
+            cy={cy}
+            startAngle={startAngle}
+            endAngle={endAngle}
+            innerRadius={outerRadius + 6}
+            outerRadius={outerRadius + 10}
+            fill={fill}
+          />
+          <text
+            x={ex + (cos >= 0 ? 1 : -1) * -28}
+            y={ey}
+            textAnchor={textAnchor}
+            fill={fill}
+          >{`$ ${value}`}</text>
+          <text
+            x={ex + (cos >= 0 ? 1 : -1) * -28}
+            y={ey}
+            dy={18}
+            textAnchor={textAnchor}
+            fill={fill}
+          >
+            {`${(percent * 100).toFixed(2)}%`}
+          </text>
+        </g>
       </>
     );
   };
@@ -143,7 +97,7 @@ export default props => {
   return (
     <>
       <Hidden xsDown>
-        <Grid item sm={6} style={styles.container}>
+        <Grid item sm={4} style={styles.container}>
           <ResponsiveContainer width="100%" minHeight="380px">
             <PieChart>
               <Pie
@@ -154,8 +108,8 @@ export default props => {
                 activeIndex={activeIndex}
                 activeShape={renderActiveShape}
                 onMouseEnter={onPieEnter}
-                innerRadius={80}
-                outerRadius={120}
+                innerRadius={60}
+                outerRadius={100}
                 dataKey="value"
                 stroke="none"
               >
@@ -189,8 +143,8 @@ export default props => {
                 activeIndex={activeIndex}
                 activeShape={renderActiveShape}
                 onMouseEnter={onPieEnter}
-                innerRadius={80}
-                outerRadius={120}
+                innerRadius={60}
+                outerRadius={90}
                 dataKey="value"
                 stroke="none"
               >
