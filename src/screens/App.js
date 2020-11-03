@@ -8,7 +8,7 @@ import { ThemeProvider } from "@material-ui/styles/";
 import theme from "../constants/theme";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import { reducers } from "../reducers";
 import thunk from "redux-thunk";
@@ -18,12 +18,18 @@ import { loadState, saveState } from "../localStorage";
 
 const persistedState = loadState();
 
-const state = createStore(reducers, persistedState, applyMiddleware(thunk));
+//Dev tools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const state = createStore(
+  reducers,
+  persistedState,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 state.subscribe(
   throttle(() => {
     saveState({
-      user: state.getState().user
+      user: state.getState().user,
     });
   }),
   8000

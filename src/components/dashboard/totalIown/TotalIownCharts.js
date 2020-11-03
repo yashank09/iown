@@ -7,6 +7,15 @@ import { connect } from "react-redux";
 import TotalPieChart from "../../../graphs/TotalPieChart";
 
 function TotalIownCharts(props) {
+  if (props.currentCryptoPrices !== undefined) {
+    const prices = [];
+    Object.entries(props.currentCryptoPrices).map(i =>
+      //Change USD
+      prices.push([i[0], i[1]["USD"]])
+    );
+    const data = prices.reduce((max, i) => (i > max ? i : max), null);
+    console.log(data);
+  }
   return (
     <>
       <Hidden xsDown>
@@ -25,7 +34,8 @@ function TotalIownCharts(props) {
 
 const mapStateToProps = state => {
   return {
-    cryptos: state.cryptos.cryptos
+    cryptos: state.cryptos.cryptos,
+    currentCryptoPrices: state.cryptos.currentPrices
   };
 };
 

@@ -80,7 +80,6 @@ class AddCryptoComponent extends React.PureComponent {
       const startingValue = formatDecimal.exec(
         amount[0] * this.state.currentPrice
       );
-      console.log(startingValue);
       this.setState({
         totalAmount: amount[0],
         startingValue: parseFloat(startingValue[0])

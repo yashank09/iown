@@ -145,7 +145,7 @@ const TabComponent = props => {
       </Hidden>
 
       <Hidden smUp>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12}>
           <Tabs
             variant="fullWidth"
             value={value}
